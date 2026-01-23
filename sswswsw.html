@@ -1,0 +1,458 @@
+<!DOCTYPE html><html lang="en"><head>
+   <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MK-Premium Perfume Store</title>
+   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+        * {            margin: 0;            padding: 0;            box-sizing: border-box;        }
+
+ body {
+
+    font-family: 'Roboto', sans-serif;
+
+  line-height: 1.6;
+
+    color: #333;
+
+    overflow-x: hidden;
+
+    background: linear-gradient(
+        rgba(0,0,0,0.5),
+        rgba(0,0,0,0.5)
+    ),
+    url('https://images.unsplash.com/photo-1574169208507-84376144848b?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80')  no-repeat center center fixed;
+
+   background-size: cover;
+}
+
+h1, h2, h3 {
+ font-family: 'Playfair Display', serif;
+}
+
+.container {
+max-width: 1200px;
+margin: 0 auto;
+ padding: 0 20px;
+ }
+  /* Header */
+     header {
+   background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    padding: 1rem 0;
+   position: fixed;
+      width: 100%;
+    top: 0;
+   z-index: 1000;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  }
+        nav {            display: flex;            justify-content: space-between;            align-items: center;        }
+    .logo {            font-size: 2rem;            font-weight: 700;            color: #8B4513;            text-decoration: none;        }
+.nav-links {
+          display: flex;
+         list-style: none;
+    gap: 2rem;
+    }
+ .nav-links a {
+        text-decoration: none;
+        color: #333;
+        font-weight: 500;
+        transition: color 0.3s;
+        }
+     .nav-links a:hover {
+         color: #8B4513;        }
+.cart-btn {
+       background: #8B4513;
+       color: white;
+       padding: 0.5rem 1rem;
+      border: none;
+       border-radius: 25px;
+         cursor: pointer;
+       font-weight: 500;
+       transition: background 0.3s;
+    }
+
+  .cart-btn:hover {
+ background: #A0522D;        }
+/* Hero */
+   .hero {
+    height: 100vh;
+
+   display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+  text-align: center;
+
+  color: white;
+
+    margin-top: 80px;
+
+}
+
+        .hero-content h1 {
+            font-size: 4rem;
+          margin-bottom: 1rem;
+        }
+      .hero-content p {
+        font-size: 1.5rem;
+            margin-bottom: 2rem;
+        }
+       .cta-btn {
+        background: #FFD700;
+          color: #333;
+            padding: 1rem 2rem;
+          border: none;
+         border-radius: 50px;
+           font-size: 1.2rem;
+            font-weight: 500;
+            cursor: pointer;
+          transition: transform 0.3s, box-shadow 0.3s;
+           text-decoration: none;
+           display: inline-block;
+    }
+     .cta-btn:hover {
+         transform: translateY(-3px);
+           box-shadow: 0 10px 20px rgba(255,215,0,0.4);
+        }
+     /* Products */
+    .products {
+         padding: 100px 0;
+       background: #f8f9fa;        }
+  .section-title {
+          text-align: center;
+       font-size: 3rem;
+        margin-bottom: 4rem;
+         color: #8B4513;        }
+        .products-grid {
+           display: grid;
+           grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+         gap: 2rem;        }
+   .product-card {
+    background: white;
+        border-radius: 20px;
+       overflow: hidden;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        transition: transform 0.3s, box-shadow 0.3s;        }
+       .product-card:hover {
+          transform: translateY(-10px);
+        box-shadow: 0 20px 40px rgba(0,0,0,0.2);        }
+      .product-image {
+      width: 100%;
+      height: 300px;
+        object-fit: cover;
+          background: #eee;
+    }
+     .product-info {
+        padding: 1.5rem;        }
+   .product-name {
+ font-size: 1.5rem;
+   font-weight: 700;
+     margin-bottom: 0.5rem;
+      color: #333;        }
+    .product-desc {
+   color: #666;
+       margin-bottom: 1rem;
+    }
+       .product-price {
+      font-size: 1.8rem;
+         font-weight: 700;
+           color: #8B4513;
+          margin-bottom: 1rem;
+   }
+       .add-to-cart {
+        width: 100%;
+        background: #8B4513;
+          color: white;
+          padding: 1rem;
+         border: none;
+          border-radius: 10px;
+        font-size: 1rem;
+        font-weight: 500;
+          cursor: pointer;
+            transition: background 0.3s;
+      }
+     .add-to-cart:hover {
+     background: #A0522D;
+  }
+   /* Categories */
+.categories {
+      padding: 100px 0;
+         text-align: center;
+       }
+    .categories-grid {
+        display: grid;
+           grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+         gap: 2rem;
+        margin-top: 3rem;
+    }
+
+       .category-card {
+         padding: 3rem 2rem;
+          background: white;
+         border-radius: 20px;
+           box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+       transition: transform 0.3s;
+       }
+
+     .category-card:hover {
+      transform: scale(1.05);
+     }
+   .category-icon {
+         font-size: 4rem;
+         margin-bottom: 1rem;        }
+
+ /* Newsletter */
+  .newsletter {
+       /* background: linear-gradient(135deg, #8B4513 0%, #A0522D 100%);*/
+            color: white;
+        padding: 80px 0;
+         text-align: center;
+      }
+   .newsletter form {
+            max-width: 500px;
+            margin: 2rem auto 0;
+            display: flex;
+      gap: 1rem;
+       }
+ .newsletter input {
+           flex: 1;
+           padding: 1rem;
+         border: none;
+         border-radius: 50px;
+         font-size: 1rem;        }
+  .newsletter button {
+      background: #FFD700;
+     color: #333;
+   padding: 1rem 2rem;
+           border: none;
+          border-radius: 50px;
+       font-weight: 500;
+   cursor: pointer;
+  }        /* Footer */
+   footer {
+       background: #333;
+          color: white;
+     padding: 50px 0 20px;
+    text-align: center;        }
+   .footer-content {
+   display: grid;
+   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+       gap: 2rem;
+           margin-bottom: 2rem;        }
+        .footer-section h3 {           margin-bottom: 1rem;
+           color: #FFD700;        }
+        .footer-section a {
+          color: #ccc;
+            text-decoration: none;           display: block;
+ margin-bottom: 0.5rem;        }
+      .social-links {
+          display: flex;
+          justify-content: center;            gap: 1rem;
+     margin-top: 1rem;        }
+    .social-links a {
+        color: white;
+          font-size: 1.5rem;        }
+    /* Responsive */
+       @media (max-width: 768px) {
+        .nav-links {
+             display: none;            }
+          .hero-content h1 {                font-size: 2.5rem;            }
+            .newsletter form {
+        flex-direction: column;            }        }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+    <header>
+        <nav class="container">
+            <a href="#" class="logo">MK</a>            <ul class="nav-links">                <li><a href="#home">Home</a></li>                <li><a
+
+href="#shop">Shop</a></li>                <li><a href="#about">About</a></li>                <li><a href="#contact">Contact</a></li>            </ul>
+
+    <button class="cart-btn">🛒 Cart (0)</button>  <button class="cart-btn" onclick="toggleLang()">AR</button>
+
+        </nav>    </header>    <!-- Hero Section -->    <section class="hero" id="home">
+<div class="hero-content container">            <h1>Discover Your Signature Scent</h1>
+            <p>Indulge in luxury fragrances crafted for every moment.</p>
+           <a href="#shop" class="cta-btn">Shop Now</a>
+       </div>
+  </section>
+   <!-- Featured Products -->
+  <section class="products" id="shop">
+   <div class="container">
+      <h2 class="section-title">Featured Perfumes</h2>
+            <div class="products-grid">
+               <div class="product-card">
+                  <img src="https://images.unsplash.com/photo-1587014611670-b7ba47c7e96e?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Eau de Luxe"
+
+class="product-image">                    <div class="product-info">
+                       <h3 class="product-name">Eau de Luxe</h3>
+                        <p class="product-desc">A sophisticated blend of jasmine and sandalwood for timeless elegance.</p>
+                        <div class="product-price">89.99</div>                        <button class="add-to-cart">Add to Cart</button>
+            </div>
+              </div>
+            <div class="product-card">                    <img src="https://images.unsplash.com/photo-1590736969954-9e6b526d6d5d?ixlib=rb-
+
+4.0.3&auto=format&fit=crop&w=500&q=80" alt="Ocean Breeze" class="product-image">
+        <div class="product-info">
+                      <h3 class="product-name">Ocean Breeze</h3>
+                      <p class="product-desc">Fresh aquatic notes with a hint of citrus, perfect for summer days.</p>
+              <div class="product-price">
+74.99</div>
+                <button class="add-to-cart">Add to Cart</button>
+                   </div>
+              </div>
+              <div class="product-card">
+                  <img src="https://images.unsplash.com/photo-1574169208507-84376144848b?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Midnight Rose"
+
+class="product-image">                    <div class="product-info">                        <h3 class="product-name">Midnight Rose</h3>
+  <p class="product-desc">Intense rose and vanilla for an enchanting evening allure.</p>
+                        <div class="product-price">99.99</div>
+                        <button class="add-to-cart">Add to Cart</button>                    </div>                </div>                <div
+
+class="product-card">                    <img src="https://images.unsplash.com/photo-1611593731752-fb1d3d8dc614?ixlib=rb-
+
+4.0.3&auto=format&fit=crop&w=500&q=80" alt="Woody Ember" class="product-image">                    <div class="product-info">                        <h3
+
+class="product-name">Woody Ember</h3>                        <p class="product-desc">Warm cedarwood and amber for a bold, masculine presence.</p>
+
+            <div class="product-price">84.99</div>
+                       <button class="add-to-cart">Add to Cart</button>
+                    </div>                </div>            </div>        </div>    </section>
+   <!-- Categories -->
+   <section class="categories">        <div class="container">            <h2 class="section-title">Explore by Category</h2>
+          <div class="categories-grid">                <div class="category-card">                    <div class="category-icon">👔</div>
+
+<h3>Men's Fragrances</h3>                    <p>Bold and refined scents for the modern gentleman.</p>                </div>                <div
+
+class="category-card">                    <div class="category-icon">👗</div>                    <h3>Women's Fragrances</h3>                    <p>Elegant
+
+and floral notes to captivate.</p>                </div>                <div class="category-card">                    <div class="category-icon">⚧️</div>
+
+                <h3>Unisex</h3>                    <p>Versatile aromas for everyone.</p>                </div>            </div>        </div>    </section>
+
+   <!-- Newsletter -->    <section class="newsletter">        <div class="container">            <h2 style="font-size: 2.5rem; margin-bottom: 1rem;">Stay in
+
+the Scent Loop</h2>            <p style="font-size: 1.2rem; margin-bottom: 2rem;">Subscribe for exclusive offers and new arrivals.</p>            <form>
+
+           <input type="email" placeholder="Enter your email" required>                <button type="submit">Subscribe</button>            </form>
+</div>    </section>
+ <!-- Footer -->
+    <footer id="contact">        <div class="container">            <div class="footer-content">                <div
+
+class="footer-section">                    <h3>MK</h3>
+    <p>Your destination for premium perfumes. Crafted with passion, delivered with care.</p>                </div>                <div class="footer-section">                    <h3>Quick Links</h3>                    <a href="#">Shop</a>
+
+                  <a href="#">About Us</a>                    <a href="#">Contact</a>                    <a href="#">Shipping</a>                </div>
+
+          <div class="footer-section">                    <h3>Support</h3>                    <a href="#">FAQ</a>                    <a href="#">Returns</a>
+
+                   <a href="#">Privacy Policy</a>                </div>                <div class="footer-section">                    <h3>Follow Us</h3>
+
+                <div class="social-links">                        <a href="#">📘</a>                        <a href="#">📷</a>                        <a
+
+href="#">🐦</a>                        <a href="#">💼</a>                    </div>                </div>            </div>            <p>&copy; 2026 MK. All
+
+rights reserved.</p>        </div>    </footer>    <script>      // Simple cart functionality
+let cartCount = 0;
+
+document.querySelectorAll('.add-to-cart').forEach(btn => {
+  btn.addEventListener('click', () => {
+    cartCount++;
+    document.querySelector('.cart-btn').textContent = `🛒 Cart (${cartCount})`;
+    btn.textContent = 'Added!';
+    setTimeout(() => btn.textContent = 'Add to Cart', 2000);
+  });
+});
+
+// Smooth scrolling
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+  anchor.addEventListener('click', function (e) {
+    e.preventDefault();
+    document.querySelector(this.getAttribute('href')).scrollIntoView({
+      behavior: 'smooth'
+    });
+  });
+});
+
+// Newsletter form
+document.querySelector('.newsletter form').addEventListener('submit', (e) => {
+  e.preventDefault();
+  alert('Thank you for subscribing!');
+});
+
+let isArabic = false;
+
+function toggleLang() {
+  isArabic = !isArabic;
+
+  document.documentElement.lang = isArabic ? 'ar' : 'en';
+  document.body.dir = isArabic ? 'rtl' : 'ltr';
+
+  document.querySelector('.hero-content h1').textContent =
+    isArabic ? 'اكتشف عطرك المميز' : 'Discover Your Signature Scent';
+
+  document.querySelector('.hero-content p').textContent =
+    isArabic ? 'استمتع بأفخم العطور لكل لحظة'
+    : 'Indulge in luxury fragrances crafted for every moment.';
+
+  document.querySelector('.cta-btn').textContent =
+    isArabic ? 'تسوق الآن' : 'Shop Now';
+
+  document.querySelectorAll('.section-title')[0].textContent =
+    isArabic ? 'العطور المميزة' : 'Featured Perfumes';
+
+  document.querySelectorAll('.section-title')[1].textContent =
+    isArabic ? 'استكشف حسب الفئة' : 'Explore by Category';
+
+  const productDescs = document.querySelectorAll('.product-desc');
+
+  const arabicDescs = [
+    'مزيج أنيق من الياسمين والصندل للأناقة الخالدة',
+    'نغمات مائية منعشة مع لمسة حمضيات',
+    'ورد وفانيليا لجاذبية مسائية ساحرة',
+    'خشب الأرز والعنبر لحضور قوي'
+  ];
+
+  const englishDescs = [
+    'A sophisticated blend of jasmine and sandalwood for timeless elegance.',
+    'Fresh aquatic notes with a hint of citrus.',
+    'Intense rose and vanilla for an enchanting evening allure.',
+    'Warm cedarwood and amber for a bold presence.'
+  ];
+
+  productDescs.forEach((el, i) => {
+    el.textContent = isArabic ? arabicDescs[i] : englishDescs[i];
+  });
+
+  document.querySelectorAll('.add-to-cart').forEach(btn => {
+    btn.textContent = isArabic ? 'أضف إلى السلة' : 'Add to Cart';
+  });
+
+  const catTitles = document.querySelectorAll('.category-card h3');
+  const catDescs = document.querySelectorAll('.category-card p');
+
+  const arCats = ['عطور رجالي', 'عطور نسائي', 'عطور للجميع'];
+  const enCats = ["Men's Fragrances", "Women's Fragrances", 'Unisex'];
+
+  const arCatDesc = [
+    'روائح جريئة للرجل العصري',
+    'نغمات أنثوية أنيقة',
+    'روائح تناسب الجميع'
+  ];
+  const enCatDesc = [
+    'Bold and refined scents for the modern gentleman.',
+    'Elegant and floral notes to captivate.',
+    'Versatile aromas for everyone.'
+  ];
+
+  catTitles.forEach((el, i) => {
+    el.textContent = isArabic ? arCats[i] : enCats[i];
+  });
+
+  catDescs.forEach((el, i) => {
+    el.textContent = isArabic ? arCatDesc[i] : enCatDesc[i];
+  });
+}
+  </script></body></html>
