@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Category - MK Premium</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Roboto', sans-serif; background: #fdfdfd; color: #333; }
+        h1 { font-family: 'Playfair Display', serif; color: #8B4513; text-align: center; margin: 40px 0; font-size: 3rem; }
+
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+
+        /* Header (Same as Main) */
+        header {
+            background: white;
+            padding: 1rem 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            position: sticky; top: 0; z-index: 100;
+        }
+        nav { display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-size: 1.5rem; font-weight: 700; color: #8B4513; text-decoration: none; }
+
+        /* Products Grid */
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+
+        .product-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            transition: 0.3s;
+            border: 1px solid #eee;
+            position: relative;
+        }
+        .product-card:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
+
+        .product-img { width: 100%; height: 320px; object-fit: cover; background: #f9f9f9; }
+
+        .product-info { padding: 20px; text-align: center; }
+        .product-name { font-size: 1.2rem; font-weight: 700; margin-bottom: 10px; }
+        .product-price { color: #8B4513; font-weight: 700; font-size: 1.1rem; margin-bottom: 15px; }
+
+        .add-btn {
+            background: #8B4513; color: white; border: none;
+            padding: 10px 20px; border-radius: 25px; cursor: pointer;
+            width: 100%; transition: 0.3s;
+        }
+        .add-btn:hover { background: #333; }
+
+        .breadcrumb { margin-top: 20px; font-size: 0.9rem; color: #888; }
+        .breadcrumb a { color: #8B4513; text-decoration: none; }
+    </style>
+</head>
+<body>
+
+<header>
+    <nav class="container">
+        <a href="index.html" class="logo">MK PREMIUM</a>
+        <a href="cart.html" style="text-decoration: none;">🛒 Cart</a>
+    </nav>
+</header>
+
+<div class="container">
+    <div class="breadcrumb">
+        <a href="index.html">Home</a> / <span id="category-path">Category</span>
+    </div>
+
+    <h1 id="category-title">Fragrances</h1>
+
+    <div class="products-grid" id="products-container">
+        </div>
+</div>
+
+<script>
+    // بيانات المنتجات (يمكنك إضافة المزيد هنا)
+    const allProducts = {
+        men: [
+            { name: "Royal Oud", price: "$250.00", img: "https://images.unsplash.com/photo-1523293182086-7651a899d37f?auto=format&fit=crop&w=500&q=80" },
+            { name: "Silver Mountain", price: "$180.00", img: "https://images.unsplash.com/photo-1594035910387-fea47794261f?auto=format&fit=crop&w=500&q=80" },
+            { name: "Dark Leather", price: "$210.00", img: "https://images.unsplash.com/photo-1557170334-a9632e77c6e4?auto=format&fit=crop&w=500&q=80" }
+        ],
+        women: [
+            { name: "Velvet Rose", price: "$190.00", img: "https://images.unsplash.com/photo-1541643600914-78b084683601?auto=format&fit=crop&w=500&q=80" },
+            { name: "Jasmine Bliss", price: "$160.00", img: "https://images.unsplash.com/photo-1592945403244-b3fbafd7f539?auto=format&fit=crop&w=500&q=80" },
+            { name: "Pure Vanilla", price: "$145.00", img: "https://images.unsplash.com/photo-1595428774223-ef52624120d2?auto=format&fit=crop&w=500&q=80" }
+        ],
+        unisex: [
+            { name: "Amber Gold", price: "$220.00", img: "https://images.unsplash.com/photo-1585232351009-aa87416fca90?auto=format&fit=crop&w=500&q=80" },
+            { name: "Ocean Breeze", price: "$149.00", img: "https://images.unsplash.com/photo-1574169208507-84376144848b?auto=format&fit=crop&w=500&q=80" }
+        ]
+    };
+
+    // وظيفة لقراءة نوع القسم من الرابط (URL)
+    function loadCategory() {
+        const params = new URLSearchParams(window.location.search);
+        const cat = params.get('type') || 'men'; // الافتراضي رجالي لو مفيش نوع
+
+        const container = document.getElementById('products-container');
+        const title = document.getElementById('category-title');
+        const path = document.getElementById('category-path');
+
+        // تحديث النصوص
+        const titles = { men: "Men's Collection", women: "Women's Collection", unisex: "Unisex Scents" };
+        title.textContent = titles[cat];
+        path.textContent = titles[cat];
+
+        // عرض المنتجات الخاصة بهذا القسم فقط
+        const products = allProducts[cat];
+        container.innerHTML = products.map(p => `
+            <div class="product-card">
+                <img src="${p.img}" class="product-img" alt="${p.name}">
+                <div class="product-info">
+                    <div class="product-name">${p.name}</div>
+                    <div class="product-price">${p.price}</div>
+                    <button class="add-btn">Add to Cart</button>
+                </div>
+            </div>
+        `).join('');
+    }
+
+    loadCategory();
+</script>
+
+</body>
+</html>
