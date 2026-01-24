@@ -201,7 +201,15 @@ margin: 0 auto;
    .category-icon {
          font-size: 4rem;
          margin-bottom: 1rem;        }
-
+.facebook-f {
+    color: #1877F2; /* لون فيسبوك الرسمي */
+    font-family: sans-serif;
+    font-weight: bold;
+    font-size: 1.8rem; /* حجم مناسب ليكون مثل الـ Emojis */
+    text-decoration: none;
+    display: inline-block;
+    vertical-align: middle;
+}
  /* Newsletter */
   .newsletter {
        /* background: linear-gradient(135deg, #8B4513 0%, #A0522D 100%);*/
@@ -315,16 +323,31 @@ href="#shop">Shop</a></li>                <li><a href="#about">About</a></li>   
         </div>
     </section>
    <!-- Categories -->
-   <section class="categories">        <div class="container">            <h2 class="section-title">Explore by Category</h2>
-          <div class="categories-grid">                <div class="category-card">                    <div class="category-icon">👔</div>
-
-<h3>Men's Fragrances</h3>                    <p>Bold and refined scents for the modern gentleman.</p>                </div>                <div
-
-class="category-card">                    <div class="category-icon">👗</div>                    <h3>Women's Fragrances</h3>                    <p>Elegant
-
-and floral notes to captivate.</p>                </div>                <div class="category-card">                    <div class="category-icon">⚧️</div>
-
-                <h3>Unisex</h3>                    <p>Versatile aromas for everyone.</p>                </div>            </div>        </div>    </section>
+   <section class="categories">
+          <div class="container">
+                     <h2 class="section-title">Explore by Category</h2>
+          <div class="categories-grid">
+                          <div class="category-card">
+                                                <div class="category-icon">👔</div>
+<h3>Men's Fragrances</h3>
+                    <p>Bold and refined scents for the modern gentleman.</p>
+                   <!-- <a href="category.html?type=men" class="category-card"></a> -->
+              </div>
+                         <div class="category-card">
+                            <div class="category-icon">👗</div>
+                                      <h3>Women's Fragrances</h3>
+                                                       <p>Elegant and floral notes to captivate.</p>
+                                                    <!--   <a href="category.html?type=women" class="category-card"></a> -->
+                           </div>
+            <div class="category-card">
+                      <div class="category-icon">⚧️</div>
+                <h3>Unisex</h3>
+                              <p>Versatile aromas for everyone.</p>
+                             <!-- <a href="category.html?type=unisex" class="category-card"></a> -->
+                                        </div>
+                                                 </div>
+                                                      </div>   
+   </section>
 
    <!-- Newsletter -->    <section class="newsletter">        <div class="container">            <h2 style="font-size: 2.5rem; margin-bottom: 1rem;">Stay in
 
@@ -344,11 +367,11 @@ class="footer-section">                    <h3>MK</h3>
 
                    <a href="#">Privacy Policy</a>                </div>                <div class="footer-section">                    <h3>Follow Us</h3>
 
-                <div class="social-links">                        <a href="#">📘</a>                        <a href="#">📷</a>                        <a
+                <div class="social-links">                        <a href="https://www.facebook.com/share/1HSuv3cbC6/" class="facebook-f">f</a>                               <a href="#">📞</a>                    </div>                </div>            </div>            <p>&copy; 2026 MK. All
 
-href="#">🐦</a>                        <a href="#">💼</a>                    </div>                </div>            </div>            <p>&copy; 2026 MK. All
-
-rights reserved.</p>        </div>    </footer>    <script>      // Simple cart functionality
+rights reserved.</p>        </div>    </footer> 
+   <script> 
+      // Simple cart functionality
 let cartCount = 0;
 
 document.querySelectorAll('.add-to-cart').forEach(btn => {
