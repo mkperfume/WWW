@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Checkout - MK Premium</title>
+    <link rel="stylesheet" href="css/global.css">
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -100,6 +101,20 @@
         }
     </style>
 </head>
+<header class="main-header">
+  <div class="container nav">
+    <a href="index.html" class="logo">MK</a>
+
+    <ul class="nav-links">
+      <li><a href="index.html#shop">Shop</a></li>
+      <li><a href="index.html#about">About</a></li>
+      <li><a href="index.html#contact">Contact</a></li>
+    </ul>
+
+    <a href="cart.html" class="cart-link">🛒 Cart</a>
+  </div>
+</header>
+
 <body dir="ltr"> <div class="container">
     <a href="index.html" style="text-decoration: none; color: #8B4513;">← Back to Shop</a>
     <h1 style="margin: 20px 0;">Checkout</h1>
@@ -173,44 +188,79 @@
         </div>
 
         <div class="card" style="height: fit-content;">
-            <h2 class="section-title">Order Summary</h2>
-            <div class="summary-item">
-                <span>Eau de Luxe (x1)</span>
-                <span>$199.89</span>
-            </div>
-            <div class="summary-item">
-                <span>Midnight Rose (x1)</span>
-                <span>$99.99</span>
-            </div>
-            <div class="summary-item" style="margin-top: 20px;">
-                <span>Subtotal</span>
-                <span>$299.88</span>
-            </div>
-            <div class="summary-item">
-                <span>Shipping</span>
-                <span style="color: #27ae60;">Free</span>
-            </div>
-            <div class="summary-item total-row">
-                <span>Total</span>
-                <span>$299.88</span>
-            </div>
+    <h2 class="section-title">Order Summary</h2>
 
-            <button type="submit" form="checkout-form" class="pay-btn">Complete Purchase</button>
-            <p style="text-align: center; font-size: 0.8rem; color: #999; margin-top: 15px;">
-                Secure 256-bit SSL Encrypted Payment
-            </p>
-        </div>
+    <div id="order-summary"></div>
+
+    <div class="summary-item total-row">
+      <span>Total</span>
+      <span id="checkout-total">$0.00</span>
+    </div>
+
+    <button type="submit" form="checkout-form" class="pay-btn">
+      Complete Purchase
+    </button>
+
+    <p style="text-align:center;font-size:0.8rem;color:#999;margin-top:15px;">
+      Secure Payment
+    </p>
+  </div>
+
     </div>
 </div>
+<footer class="main-footer">
+  <div class="container">
+    <p>© 2026 MK Premium Perfumes</p>
+  </div>
+</footer>
 
 <script>
-    // تغيير شكل السعر أو اللغة حسب الرغبة كما في الصفحات السابقة
-    // هذه الصفحة مهيأة لتكون الخطوة النهائية في المتجر
-    document.getElementById('checkout-form').addEventListener('submit', function(e) {
-        e.preventDefault();
-        alert('Success! Your order has been placed. Thank you for shopping with MK.');
-        window.location.href = 'index.html'; // العودة للرئيسية بعد النجاح
-    });
+
+    const cart = JSON.parse(localStorage.getItem("cart")) || [];
+const summary = document.getElementById("order-summary");
+const totalEl = document.getElementById("checkout-total");
+
+let total = 0;
+
+cart.forEach(item => {
+  total += item.qty * parseFloat(item.price);
+
+  summary.innerHTML += `
+    <div class="summary-item">
+      <span>${item.name} (x${item.qty})</span>
+      <span>$${(item.qty * item.price).toFixed(2)}</span>
+    </div>
+  `;
+});
+
+totalEl.textContent = `$${total.toFixed(2)}`;
+document.getElementById('checkout-form').addEventListener('submit', function(e) {
+  e.preventDefault();
+
+  const order = {
+    customer: {
+      firstName: this.querySelector('input[placeholder="John"]').value,
+      lastName: this.querySelector('input[placeholder="Doe"]').value,
+      email: this.querySelector('input[type="email"]').value,
+      address: this.querySelector('input[placeholder="Street Name, Building No."]').value,
+      city: this.querySelector('input[required]').value
+    },
+    cart: cart,
+    total: total,
+    date: new Date().toISOString()
+  };
+
+  // حفظ الأوردر
+  let orders = JSON.parse(localStorage.getItem("orders")) || [];
+  orders.push(order);
+  localStorage.setItem("orders", JSON.stringify(orders));
+
+  localStorage.removeItem("cart");
+
+  alert("Order placed successfully!");
+  window.location.href = "order-success.html";
+});
+
 </script>
 
 </body>
