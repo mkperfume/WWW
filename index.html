@@ -3,6 +3,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>MK-Premium Perfume Store</title>
    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+   <link rel="stylesheet" href="css/global.css">
 <style>
         * {            margin: 0;            padding: 0;            box-sizing: border-box;        }
 
@@ -270,24 +271,29 @@ margin: 0 auto;
         flex-direction: column;            }        }
   </style>
 </head>
-<body>
-  <!-- Header -->
-    <header>
-        <nav class="container">
-            <a href="#" class="logo">MK</a>            <ul class="nav-links">                <li><a href="#home">Home</a></li>                <li><a
+<header class="main-header">
+  <div class="container nav">
+    <a href="index.html" class="logo">MK</a>
 
-href="#shop">Shop</a></li>                <li><a href="#about">About</a></li>                <li><a href="#contact">Contact</a></li>            </ul>
+    <ul class="nav-links">
+      <li><a href="index.html#shop">Shop</a></li>
+      <li><a href="index.html#about">About</a></li>
+      <li><a href="index.html#contact">Contact</a></li>
+    </ul>
 
-    <button class="cart-btn">🛒 Cart (0)</button>  <button class="cart-btn" onclick="toggleLang()">AR</button>
+    <button class="cart-link" onclick="goToCart()">🛒 Cart (0)</button>
+    <button class="cart-link" onclick="toggleLang()">AR</button>
 
-        </nav>    </header>    <!-- Hero Section -->    <section class="hero" id="home">
+  </div>
+</header>
+<body>    <!-- Hero Section -->    <section class="hero" id="home">
 <div class="hero-content container">            <h1>Discover Your Signature Scent</h1>
             <p>Indulge in luxury fragrances crafted for every moment.</p>
            <a href="#shop" class="cta-btn">Shop Now</a>
        </div>
   </section>
    <!-- Featured Products -->
-  
+
     <section class="products" id="shop">
         <div class="container">
             <h2 class="section-title">Featured Perfumes</h2>
@@ -327,7 +333,7 @@ href="#shop">Shop</a></li>                <li><a href="#about">About</a></li>   
     <div class="container">
         <h2 class="section-title">Explore by Category</h2>
         <div class="categories-grid">
-            
+
             <a href="category.html?type=men" class="category-card" style="text-decoration: none; color: inherit; display: block;">
                 <div class="category-icon">👔</div>
                 <h3>Men's Fragrances</h3>
@@ -370,20 +376,8 @@ class="footer-section">                    <h3>MK</h3>
 
                 <div class="social-links">                        <a href="https://www.facebook.com/share/1HSuv3cbC6/" class="facebook-f">f</a>                               <a href="#">📞</a>                    </div>                </div>            </div>            <p>&copy; 2026 MK. All
 
-rights reserved.</p>        </div>    </footer> 
-   <script> 
-      // Simple cart functionality
-let cartCount = 0;
-
-document.querySelectorAll('.add-to-cart').forEach(btn => {
-  btn.addEventListener('click', () => {
-    cartCount++;
-    document.querySelector('.cart-btn').textContent = `🛒 Cart (${cartCount})`;
-    btn.textContent = 'Added!';
-    setTimeout(() => btn.textContent = 'Add to Cart', 2000);
-  });
-});
-
+rights reserved.</p>        </div>    </footer>
+   <script>
 // Smooth scrolling
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
   anchor.addEventListener('click', function (e) {
@@ -473,4 +467,44 @@ function toggleLang() {
     el.textContent = isArabic ? arCatDesc[i] : enCatDesc[i];
   });
 }
+function goToCart() {
+  window.location.href = "cart.html";
+}
+let cart = JSON.parse(localStorage.getItem("cart")) || [];
+updateCartCount();
+
+document.querySelectorAll('.add-to-cart').forEach((btn, index) => {
+  btn.addEventListener('click', () => {
+
+    const card = btn.closest('.product-card');
+
+    const product = {
+      id: index,
+      name: card.querySelector('.product-name').textContent,
+      price: card.querySelector('.product-price').textContent,
+      image: card.querySelector('img').src,
+      qty: 1
+    };
+
+    const existing = cart.find(item => item.id === product.id);
+
+    if (existing) {
+      existing.qty++;
+    } else {
+      cart.push(product);
+    }
+
+    localStorage.setItem("cart", JSON.stringify(cart));
+    updateCartCount();
+
+    btn.textContent = isArabic ? 'تمت الإضافة ✓' : 'Added ✓';
+    setTimeout(() => btn.textContent = isArabic ? 'أضف إلى السلة' : 'Add to Cart', 1500);
+  });
+});
+
+function updateCartCount() {
+  const totalQty = cart.reduce((sum, item) => sum + item.qty, 0);
+  document.querySelector('.cart-link').textContent = `🛒 Cart (${totalQty})`;
+}
+
   </script></body></html>
