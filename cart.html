@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Your Cart - MK Premium</title>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/global.css">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
@@ -116,12 +117,21 @@
 </head>
 <body>
 
-<header>
-    <nav class="container">
-        <a href="index.html" class="logo">MK</a>
-        <button class="checkout-btn" style="padding: 0.5rem 1rem;" onclick="toggleLang()">AR/EN</button>
-    </nav>
-</header>
+  <header class="main-header">
+    <div class="container nav">
+      <a href="index.html" class="logo">MK</a>
+
+      <ul class="nav-links">
+        <li><a href="index.html#shop">Shop</a></li>
+        <li><a href="index.html#about">About</a></li>
+        <li><a href="index.html#contact">Contact</a></li>
+      </ul>
+
+      <button class="cart-link" onclick="goToCart()">🛒 Cart (0)</button>
+      <button class="cart-link" onclick="toggleLang()">AR</button>
+
+    </div>
+  </header>
 
 <div class="container">
     <div class="cart-wrapper">
@@ -130,69 +140,109 @@
             <span id="item-count">3 Items</span>
         </div>
 
-        <div id="cart-items-container">
-            <div class="cart-item">
-                <img src="2.jpg" alt="Perfume">
-                <div class="item-details">
-                    <p class="item-name">Eau de Luxe</p>
-                    <p class="item-price">$199.89</p>
-                </div>
+        <div id="cart-items-container"></div>
                 <div class="quantity-controls">
                     <button class="qty-btn">-</button>
                     <span>1</span>
                     <button class="qty-btn">+</button>
                 </div>
                 <button class="remove-btn" id="remove-text">Remove</button>
+                <button class="checkout-btn" onclick="goToCheckout()">
+                  Proceed to Checkout
+                </button>
             </div>
-
-            <div class="cart-item">
-                <img src="1.jpg" alt="Perfume">
-                <div class="item-details">
-                    <p class="item-name">Midnight Rose</p>
-                    <p class="item-price">$99.99</p>
-                </div>
-                <div class="quantity-controls">
-                    <button class="qty-btn">-</button>
-                    <span>1</span>
-                    <button class="qty-btn">+</button>
-                </div>
-                <button class="remove-btn" id="remove-text-2">Remove</button>
-            </div>
-        </div>
-
-        <div class="cart-summary">
-            <p id="total-text" style="color: #666;">Total Amount</p>
-            <div class="total-price">$299.88</div>
-            <button class="checkout-btn" id="checkout-text">Proceed to Checkout</button>
-        </div>
     </div>
 </div>
+<footer class="main-footer">
+  <div class="container">
+    <p>© 2026 MK Premium Perfumes</p>
+  </div>
+</footer>
 
 <script>
-    let isArabic = false;
+  let isArabic = false;
 
-    function toggleLang() {
-        isArabic = !isArabic;
-        document.body.dir = isArabic ? 'rtl' : 'ltr';
+  function toggleLang() {
+      isArabic = !isArabic;
+      document.body.dir = isArabic ? 'rtl' : 'ltr';
 
-        document.getElementById('cart-title').textContent = isArabic ? 'سلة المشتريات' : 'Your Shopping Cart';
-        document.getElementById('total-text').textContent = isArabic ? 'المبلغ الإجمالي' : 'Total Amount';
-        document.getElementById('checkout-text').textContent = isArabic ? 'إتمام عملية الشراء' : 'Proceed to Checkout';
+      document.getElementById('cart-title').textContent = isArabic ? 'سلة المشتريات' : 'Your Shopping Cart';
+      document.getElementById('total-text').textContent = isArabic ? 'المبلغ الإجمالي' : 'Total Amount';
+      document.getElementById('checkout-text').textContent = isArabic ? 'إتمام عملية الشراء' : 'Proceed to Checkout';
 
-        document.querySelectorAll('.remove-btn').forEach(btn => {
-            btn.textContent = isArabic ? 'إزالة' : 'Remove';
-        });
+      document.querySelectorAll('.remove-btn').forEach(btn => {
+          btn.textContent = isArabic ? 'إزالة' : 'Remove';
+      });
 
-        // تحديث أسماء المنتجات (كمثال)
-        const names = document.querySelectorAll('.item-name');
-        if(isArabic) {
-            names[0].textContent = "أو دي لوكس";
-            names[1].textContent = "ميدنايت روز";
-        } else {
-            names[0].textContent = "Eau de Luxe";
-            names[1].textContent = "Midnight Rose";
-        }
-    }
+  }
+    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+const container = document.getElementById("cart-items-container");
+const totalPriceEl = document.querySelector(".total-price");
+const itemCountEl = document.getElementById("item-count");
+
+renderCart();
+
+function renderCart() {
+  container.innerHTML = "";
+  let total = 0;
+  let totalItems = 0;
+
+  if (cart.length === 0) {
+    container.innerHTML = `<p class="empty-msg">Cart is empty</p>`;
+    totalPriceEl.textContent = "$0.00";
+    itemCountEl.textContent = "0 Items";
+    return;
+  }
+
+  cart.forEach((item, index) => {
+    total += parseFloat(item.price) * item.qty;
+    totalItems += item.qty;
+
+    container.innerHTML += `
+      <div class="cart-item">
+        <img src="${item.image}">
+        <div class="item-details">
+          <p class="item-name">${item.name}</p>
+          <p class="item-price">$${item.price}</p>
+        </div>
+
+        <div class="quantity-controls">
+          <button class="qty-btn" onclick="changeQty(${index}, -1)">-</button>
+          <span>${item.qty}</span>
+          <button class="qty-btn" onclick="changeQty(${index}, 1)">+</button>
+        </div>
+
+        <button class="remove-btn" onclick="removeItem(${index})">
+          Remove
+        </button>
+      </div>
+    `;
+  });
+
+  totalPriceEl.textContent = `$${total.toFixed(2)}`;
+  itemCountEl.textContent = `${totalItems} Items`;
+}
+
+function changeQty(index, change) {
+  cart[index].qty += change;
+  if (cart[index].qty <= 0) cart.splice(index, 1);
+  localStorage.setItem("cart", JSON.stringify(cart));
+  renderCart();
+}
+
+function removeItem(index) {
+  cart.splice(index, 1);
+  localStorage.setItem("cart", JSON.stringify(cart));
+  renderCart();
+}
+function goToCheckout() {
+  if (cart.length === 0) {
+    alert("Cart is empty");
+    return;
+  }
+  window.location.href = "charge&payment.html";
+}
+
 </script>
 
 </body>
